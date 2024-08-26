@@ -1,0 +1,80 @@
+@font-face {
+	font-family: poppins;
+	src: url(../assets/font/Poppins/Poppins-BlackItalic.ttf);
+}
+
+header {
+    padding: 20px 20px;
+    background-color: grey;
+    background-image: url(../assets/img/header.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100vh;
+
+    font-family: poppins, sans-serif;
+}
+
+@media(max-width:760px) {  
+    header {
+        background-image: none;
+        background: green;
+    }
+}
+
+.barra {
+    padding-top: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+header nav ul {
+    text-decoration: none;
+    list-style-type: none;
+
+    flex-direction: row;
+    justify-content: right;
+}
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+header h1 {
+    color: white;
+    width: 700px;
+    font-size: 50px;
+}
+
+footer nav ul {
+    text-decoration: none;
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+footer {
+    background-color: grey;
+}
+
+footer nav ul li a {
+    color: var(--thirteen-color);
+    display: flex;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+footer p {
+    color: var(--thirteen-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
