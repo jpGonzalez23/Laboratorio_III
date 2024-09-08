@@ -1,0 +1,8 @@
+.encabezado h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.parrafos p {
+  font-size: 13,5px;
+}
