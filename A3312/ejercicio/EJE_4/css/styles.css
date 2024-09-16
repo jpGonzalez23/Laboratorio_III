@@ -1,0 +1,64 @@
+.encabezado {
+  background-color: rgb(36, 33, 33);
+}
+
+.encabezado h1, h2 { 
+  color: white;
+}
+
+.encabezado h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.subencabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.container_card {
+  display: flex;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: green;
+}
+
+.card {
+  border: 2px;
+  width: 300px;
+  height: 200px;
+  margin: 15px;
+  background-color: wheat;
+}
+
+.card h3, p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 12px;
+}
+
+.container_portada {
+  display: flex;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: green;
+}
+
+.card_portada {
+  border-radius: 12px;
+  width: 300px;
+  height: 200px;
+  margin: 15px;
+  background-color: wheat;
+}
+
+.card_portada h4, p {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 12px;
+
+}
