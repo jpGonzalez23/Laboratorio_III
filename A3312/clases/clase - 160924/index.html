@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<script>
+  class Persona {
+    nombre = "";
+    apellido = "";
+    #edad = 20;
+
+    constructor(p_nombre, p_apellido) {
+      this.nombre = p_nombre;
+      this.apellido = p_apellido;
+    }
+
+    set MiEdadPrivada(edad) {
+      this.#edad = edad;
+    }
+
+    get MiEdadPrivada() {
+      return this.#edad;
+    }
+
+    miedad = function () {
+      return this.#edad;
+    }
+
+    obtenerMiEdad() {
+      return this.#edad;
+    }
+  }
+
+  class Ciudadano extends Persona {
+    dni = 0;
+
+    constructor(p_nombre, p_apellido, p_dni) {
+      super(p_nombre, p_apellido);
+      this.dni = p_dni;
+    }
+  }
+  /*
+      var p1 = new Persona('juan', 'gonzalez');
+      var p2 = new Persona('a', 'b', 'c');
+  
+      p1.edad = 20;
+      console.log(p1.miedad());
+      console.log(Persona.id);
+  */
+  var c1 = new Ciudadano('juan', 'gonzalez', 43979037);
+  console.log(c1.obtenerMiEdad());
+  c1.obtenerMiEdad = () => {
+    console.log("te cambie la funcion")
+  };
+
+  var c2 = new Ciudadano('Jorge', 'Britez', 12345678);
+  console.log(c2.obtenerMiEdad());
+  c1.obtenerMiEdad();
+
+  // var o = {
+  //   nombre: 'juan',
+  //   apelldio: 'Gonzalez'
+  // };
+
+  var p1 = new Persona('juan', 'gonzalez');
+
+  console.log(p1 instanceof Persona);
+  console.log(c1 instanceof Ciudadano);
+  console.log(p1 instanceof Ciudadano);
+  console.log(c1 instanceof Persona);
+  console.log(c1 instanceof Persona && c1 instanceof Ciudadano);
+
+  console.log(JSON.stringify(p1));
+
+  var json = JSON.parse('{"nombre": "juan","apellido": "gonzalez"}')
+
+  console.log(json.nombre);
+
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

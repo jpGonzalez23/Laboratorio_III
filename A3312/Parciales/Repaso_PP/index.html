@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./styles/style.css">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <section>
+    <form action="" method="post" id="form-datos" class="form-datos">
+      <h1>Form datos</h1>
+      <div class="filtro">
+        <label for="filtrar">Filtrar por:</label>
+        <select name="filtrar" id="filtrar">
+          <option value="0">Todos</option>
+          <option value="1">Empleados</option>
+          <option value="2">Clientes</option>
+        </select>
+      </div>
+      <div class="promedio">
+        <label for="promedio">Calcular promeio</label>
+        <input type="text" name="promedio" id="promedio">
+      </div>
+      <input type="button" value="aceptar">
+    </form>
+  </section>
+</body>
+
+<script>
+
+  class Persona {
+    #id;
+    nombre;
+    apellido;
+    edad;
+
+    constructor(p_nombre, p_apellido, p_edad) {
+      this.#id++;
+      this.nombre = p_nombre;
+      this.apellido = p_apellido;
+      this.edad = p_edad;
+    }
+
+    get GetNombre() {
+      return this.nombre;
+    }
+
+    set SetNombre(nombre) {
+      if (nombre !== null) {
+        this.nombre = nombre;
+      }
+      else {
+        throw "El nombre está vacio";
+      }
+    }
+
+    get GetApelldio() {
+      return this.apellido;
+    }
+
+    set SetApellido(apellido) {
+      if (apellido !== null) {
+        this.apellido = apellido;
+      }
+      else {
+        throw "El apellido está vacio";
+      }
+    }
+
+    get GetEdad() {
+      return this.edad;
+    }
+
+    set SetEdad(edad) {
+      if (edad > 15) {
+        this.edad = edad;
+      }
+      else {
+        throw "Ingrese la edad mayor a 15";
+      }
+    }
+
+    MostrarDatos() {
+      return this.GetNombre() + this.GetApelldio() + this.GetEdad();
+    }
+
+  }
+
+  class Empleado extends Persona {
+    sueldo;
+    ventas;
+
+    constructor(e_nombre, e_apellido, e_edad, e_sueldo, e_ventas) {
+      ;
+      super(e_nombre, e_apellido, e_edad);
+      this.sueldo = e_sueldo;
+      this.ventas = e_ventas;
+    }
+
+    get GetSueldo() {
+      return this.sueldo;
+    }
+
+    set SetSueldo(sueldo) {
+      if (sueldo !== null && sueldo > 0) {
+        this.sueldo = sueldo;
+      }
+    }
+
+    get GetVentas() {
+      return this.ventas;
+    }
+
+    set SetVentas(ventas) {
+      if (ventas !== null && ventas > 0) {
+        this.ventas = ventas;
+      }
+    }
+
+    MostrarDatosEmpleados() {
+      return MostrarDatos() + this.GetSueldo() + this.GetVentas();
+    }
+  }
+
+  class Cliente extends Persona {
+    compras;
+    telefono;
+
+    constructor(c_nombre, c_apellido, c_edad, c_compras, c_telefono) {
+      super(c_nombre, c_apellido, c_edad);
+      this.compras = c_compras;
+      this.telefono = c_telefono;
+    }
+
+    get GetCompras() {
+      return this.compras;
+    }
+
+    set SetCompras(compras) {
+      if (compras !== null && compras > 0) {
+        this.compras = compras;
+      }
+    }
+    get GetTelefono() {
+      return this.telefono;
+    }
+
+    set SetTelefono(telefono) {
+      if (telefono !== null) {
+        this.telefono = telefono;
+      }
+    }
+
+    MostrarDatosCliente() {
+      return MostrarDatos() + this.GetCompras() + this.GetTelefono();
+    }
+  }
+
+</script>
+
+</html>

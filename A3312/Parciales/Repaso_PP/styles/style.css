@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+form {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 300px;
+
+  padding: 1rem;
+  border-radius: 10px;
+  background: whitesmoke;
+}
+
+.form-datos {
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 260px;
+}
