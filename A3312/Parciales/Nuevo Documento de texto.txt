@@ -1,0 +1,108 @@
+<script>
+        const personas = [
+            { id: 1, nombre: "Marcelo", apellido: "Luque", edad: 45, ventas: 15000, sueldo: 2000 },
+            { id: 2, nombre: "Ramiro", apellido: "Escobar", edad: 35, ventas: 6000, sueldo: 1000 },
+            { id: 3, nombre: "Facundo", apellido: "Cairo", edad: 30, ventas: 500, sueldo: 15000 },
+            { id: 4, nombre: "Fernando", apellido: "Nieto", edad: 18, compras: 8000, telefono: "152111131" },
+            { id: 5, nombre: "Manuel", apellido: "Loza", edad: 20, compras: 50000, telefono: "42040077" },
+            { id: 666, nombre: "Nicolas", apellido: "Serrano", edad: 23, compras: 7000, telefono: "1813181563" }
+        ];
+
+        const tablaPersonas = document.getElementById('tabla-personas');
+        const filtro = document.getElementById('filtrar');
+        const formABM = document.getElementById('form-abm');
+        const formDatos = document.getElementById('form-datos');
+        const abmForm = document.getElementById('abm-form');
+        const volverBtn = document.getElementById('volver');
+
+        // Mostrar datos en tabla
+        const mostrarDatos = () => {
+            tablaPersonas.innerHTML = '';
+            const filtradas = personas.filter(p => {
+                return filtro.value === 'todos' ||
+                    (filtro.value === 'empleados' && p.sueldo) ||
+                    (filtro.value === 'clientes' && p.telefono);
+            });
+
+            filtradas.forEach(({ id, nombre, apellido, edad, ventas, compras, sueldo, telefono }) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="col-nombre">${nombre}</td>
+                    <td class="col-apellido">${apellido}</td>
+                    <td class="col-edad">${edad}</td>
+                    <td class="col-ventas-compras">${ventas || compras}</td>
+                    <td class="col-sueldo-telefono">${sueldo || telefono}</td>
+                    <td><button onclick="editarPersona(${id})">Editar</button></td>
+                `;
+                tablaPersonas.appendChild(row);
+            });
+        };
+
+        // Filtrar datos
+        filtro.addEventListener('change', mostrarDatos);
+
+        // Editar persona
+        window.editarPersona = id => {
+            const persona = personas.find(p => p.id === id);
+            if (persona) {
+                const { nombre, apellido, edad, ventas, compras, sueldo, telefono } = persona;
+                document.getElementById('nombre').value = nombre;
+                document.getElementById('apellido').value = apellido;
+                document.getElementById('edad').value = edad;
+                document.getElementById('ventas-compras').value = ventas || compras;
+                document.getElementById('sueldo-telefono').value = sueldo || telefono;
+
+                formDatos.style.display = 'none';
+                formABM.style.display = 'block';
+            }
+        };
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', e => {
+                const colClass = e.target.id.replace('col-', ''); // Tomamos directamente el id sin alterar mucho.
+                document.querySelectorAll(`.col-${colClass}`).forEach(td => {
+                    td.style.display = e.target.checked ? '' : 'none';
+                });
+            });
+        });
+
+
+        // Agregar persona
+        document.getElementById('agregar-persona').addEventListener('click', () => {
+            formDatos.style.display = 'none';
+            formABM.style.display = 'block';
+        });
+
+        // Volver al listado
+        volverBtn.addEventListener('click', () => {
+            formDatos.style.display = 'block';
+            formABM.style.display = 'none';
+        });
+
+        // Guardar persona
+        abmForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const tipo = document.getElementById('tipo').value;
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const edad = parseInt(document.getElementById('edad').value);
+            const ventasCompras = parseInt(document.getElementById('ventas-compras').value);
+            const sueldoTelefono = document.getElementById('sueldo-telefono').value;
+
+            const nuevaPersona = {
+                id: personas.length + 1,
+                nombre,
+                apellido,
+                edad,
+                ...(tipo === 'empleado' ? { ventas: ventasCompras, sueldo: sueldoTelefono } : { compras: ventasCompras, telefono: sueldoTelefono })
+            };
+
+            personas.push(nuevaPersona);
+            mostrarDatos();
+            formDatos.style.display = 'block';
+            formABM.style.display = 'none';
+        });
+
+        // Inicializar datos
+        mostrarDatos();
+    </script>

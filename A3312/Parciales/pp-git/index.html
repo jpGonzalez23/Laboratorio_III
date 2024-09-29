@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Repaso PP</title>
+</head>
+
+<body>
+    <section id="form-datos">
+        <h1>Listado Personas</h1>
+        <div class="filtro">
+            <label for="filtrar">Filtrar por:</label>
+            <select name="filtrar" id="filtrar">
+                <option value="todos">Todos</option>
+                <option value="empleados">Empleados</option>
+                <option value="clientes">Clientes</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-nombre">Nombre</th>
+                    <th class="col-apellido">Apellido</th>
+                    <th class="col-edad">Edad</th>
+                    <th class="col-ventas-compras">Ventas/Compras</th>
+                    <th class="col-sueldo-telefono">Sueldo/Telefono</th>
+                    <th class="col-acciones">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-personas"></tbody>
+        </table>
+
+        <button id="calcular-promedio">Calcular Promedio de Edad</button>
+        <p id="promedio-edad"></p>
+    </section>
+
+    <section class="form-abm" id="form-abm" style="display: none;">
+        <h2>Formulario ABM</h2>
+        <form class="abm-form" id="abm-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" required>
+
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" required>
+
+            <label for="ventas-compras">Compras/Ventas:</label>
+            <input type="number" id="ventas-compras" required>
+
+            <label for="sueldo/telefono">Sueldo/Telefonos:</label>
+            <input type="number" id="sueldo-telefono" required>
+
+            <button class="btn-guardar" type="submit">Guardar</button>
+        </form>
+        <button class="btn-volver" id="volver">Volver al Listado</button>
+    </section>
+
+    <script>
+        // Clase Persona con toString y toJSON
+        class Persona {
+            static contadorId = 0;
+            #id;
+            nombre;
+            apellido;
+            edad;
+
+            constructor(pNombre, pApellido, pEdad) {
+                this.#id = ++Persona.contadorId;
+                this.nombre = pNombre;
+                this.apellido = pApellido;
+                this.edad = pEdad;
+            }
+
+            // Getters y setters
+            get id() {
+                return this.#id;
+            }
+
+            // Métodos
+            toString() {
+                return `ID: ${this.#id}, Nombre: ${this.nombre}, Apellido: ${this.apellido}, Edad: ${this.edad}`;
+            }
+
+            toJSON() {
+                return JSON.stringify({
+                    id: this.#id,
+                    nombre: this.nombre,
+                    apellido: this.apellido,
+                    edad: this.edad
+                });
+            }
+        }
+
+        // Clase Empleado con toString y toJSON
+        class Empleado extends Persona {
+            sueldo;
+            ventas;
+
+            constructor(eNombre, eApellido, eEdad, eSueldo, eVentas) {
+                super(eNombre, eApellido, eEdad);
+                this.sueldo = eSueldo;
+                this.ventas = eVentas;
+            }
+
+            toString() {
+                return `${super.toString()}, Sueldo: ${this.sueldo}, Ventas: ${this.ventas}`;
+            }
+
+            toJSON() {
+                const baseData = JSON.parse(super.toJSON());
+                baseData.sueldo = this.sueldo;
+                baseData.ventas = this.ventas;
+                return JSON.stringify(baseData);
+            }
+        }
+
+        // Clase Cliente con toString y toJSON
+        class Cliente extends Persona {
+            compras;
+            telefono;
+
+            constructor(cNombre, cApellido, cEdad, cCompras, cTelefono) {
+                super(cNombre, cApellido, cEdad);
+                this.compras = cCompras;
+                this.telefono = cTelefono;
+            }
+
+            toString() {
+                return `${super.toString()}, Compras: ${this.compras}, Teléfono: ${this.telefono}`;
+            }
+
+            toJSON() {
+                const baseData = JSON.parse(super.toJSON());
+                baseData.compras = this.compras;
+                baseData.telefono = this.telefono;
+                return JSON.stringify(baseData);
+            }
+        }
+
+        // Datos iniciales
+        let personas = [
+            new Empleado("Marcelo", "Luque", 45, 2000, 15000),
+            new Empleado("Ramiro", "Escobar", 35, 1000, 6000),
+            new Empleado("Facundo", "Cairo", 30, 15000, 500),
+            new Cliente("Fernando", "Nieto", 18, 8000, "152111131"),
+            new Cliente("Manuel", "Loza", 20, 50000, "42040077"),
+            new Cliente("Nicolas", "Serrano", 23, 7000, "1813181563")
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tablaPersonas = document.getElementById('tabla-personas');
+            const filtro = document.getElementById('filtrar');
+            const promedioEdad = document.getElementById('promedio-edad');
+            const calcularPromedioBtn = document.getElementById('calcular-promedio');
+            const formABM = document.getElementById('form-abm');
+            const formDatos = document.getElementById('form-datos');
+            const volverBtn = document.getElementById('volver');
+
+            // Mostrar datos en tabla
+            function mostrarDatos() {
+                tablaPersonas.innerHTML = '';
+                const filtradas = personas.filter(p => {
+                    if (filtro.value === 'todos') return true;
+                    if (filtro.value === 'empleados') return p instanceof Empleado;
+                    if (filtro.value === 'clientes') return p instanceof Cliente;
+                });
+
+                filtradas.forEach(p => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="col-nombre">${p.nombre}</td>
+                        <td class="col-apellido">${p.apellido}</td>
+                        <td class="col-edad">${p.edad}</td>
+                        <td class="col-ventas-compras">${p.ventas || p.compras}</td>
+                        <td class="col-sueldo-telefono">${p.sueldo || p.telefono}</td>
+                        <td><button onclick="editarPersona(${p.id})">Editar</button></td>
+                    `;
+                    tablaPersonas.appendChild(row);
+                });
+            }
+
+            // Filtrar datos
+            filtro.addEventListener('change', mostrarDatos);
+
+            // Calcular promedio de edad
+            calcularPromedioBtn.addEventListener('click', () => {
+                const filtradas = personas.filter(p => {
+                    if (filtro.value === 'todos') return true;
+                    if (filtro.value === 'empleados') return p instanceof Empleado;
+                    if (filtro.value === 'clientes') return p instanceof Cliente;
+                });
+
+                const promedio = filtradas.reduce((sum, p) => sum + p.edad, 0) / filtradas.length;
+                promedioEdad.textContent = `Promedio de edad: ${promedio.toFixed(2)}`;
+            });
+
+            // Editar persona
+            window.editarPersona = function (id) {
+                const persona = personas.find(p => p.id === id);
+                if (persona) {
+                    document.getElementById('nombre').value = persona.nombre;
+                    document.getElementById('apellido').value = persona.apellido;
+                    document.getElementById('edad').value = persona.edad;
+                    document.getElementById('ventas-compras').value = persona.ventas || persona.compras;
+
+                    formDatos.style.display = 'none';
+                    formABM.style.display = 'block';
+                }
+            };
+
+            // Volver al listado
+            volverBtn.addEventListener('click', () => {
+                formDatos.style.display = 'block';
+                formABM.style.display = 'none';
+            });
+
+            // Inicializar datos
+            mostrarDatos();
+        });
+
+    </script>
+</body>
+
+</html>
