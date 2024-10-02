@@ -6,10 +6,110 @@
 
     <link rel="stylesheet" href="./styles/styels.css">
     <script type="module" src="./js/script.js"></script>
-    
-    <title>Document</title>
+
+    <title>Primer Parcial</title>
 </head>
 <body>
-    
+    <!-- Formulario de Filtros y Datos -->
+    <section id="form-datos">
+        <h1>Listado de vehiculos</h1>
+
+        <!-- Filtro por tipo de persona -->
+        <div class="filtro">
+            <label for="filtrar">Filtrar por:</label>
+            <select name="filtrar" id="filtrar">
+                <option value="todos">Todos</option>
+                <option value="aereo">Aereo</option>
+                <option value="terrestre">Terrestre</option>
+            </select>
+        </div>
+
+        <!-- Checkboxes para columnas -->
+        <div class="columnas-ocultar">
+            <input type="checkbox" id="col-id" checked>
+            <label for="col-id">ID</label>
+            
+            <input type="checkbox" id="col-modelo" checked>
+            <label for="col-modelo">Modelo</label>
+            
+            <input type="checkbox" id="col-anio-fabricado" checked>
+            <label for="col-anio-fabricado">Año fabricado</label>
+
+            <input type="checkbox" id="col-velocidad-maxima" checked>
+            <label for="col-velocidad-maxima">Velocidad Maxima</label>
+
+            <input type="checkbox" id="col-altura-maxima" checked>
+            <label for="col-altura-maxima">Altura Maxima</label>
+
+            <input type="checkbox" id="col-autonomia" checked>
+            <label for="col-autonomia">Autonomia</label>
+
+            <input type="checkbox" id="col-cantidad-puertas" checked>
+            <label for="col-cantidad-puertas">Cantidad Puertas</label>
+            
+            <input type="checkbox" id="col-cantidad-ruedas" checked>
+            <label for="col-cantidad-ruedas">Cantidad de Ruedas</label>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-id">ID</th>
+                    <th class="col-modelo">Modelo</th>
+                    <th class="col-anio-fabricado">Año fabricado</th>
+                    <th class="col-velocidad-maxima">Velocidad Maxima</th>
+                    <th class="col-altura-maxima">Altura Maxima</th>
+                    <th class="col-autonomia">Autonomia</th>
+                    <th class="col-cantidad-puertas">Cantidad de Puertas</th>
+                    <th class="col-cantidad-ruedas">Cantidad de Ruedas</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-vehiculo">
+
+            </tbody>
+
+            <button id="calcular-btn">Calcular Promedio</button>
+            <p id="promedio-vehiculo"></p>
+        </table>
+
+        <button id="agregar-vehiculo">Agregar Vehiculo</button>
+    </section>
+
+    <!-- Formulario ABM para agregar/editar -->
+    <section id="form-abm" style="display: none;">
+        <h2>Fomulario ABM</h2>
+        <form class="abm-form" id="abm-form">
+            <label for="tipo">Tipo:</label>
+            <select id="tipo">
+                <option value="aereo">Aereo</option>
+                <option value="terrestre">Terrestre</option>
+            </select>
+
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" required>
+
+            <label for="anio-fabricado">Año fabricado:</label> 
+            <input type="number" id="anio-fabricado" required>
+
+            <label for="velocidad-maxima">Velocidad Maxima:</label> 
+            <input type="number" id="velocidad-maxima" required>
+
+            <label for="altura-maxima">Altura Maxima:</label>
+            <input type="number" id="altura-maxima" required>
+
+            <label for="autonomia">Autonomia:</label>
+            <input type="number" id="autonomia" required>
+
+            <label for="cantidad-puertas">Cantidad de Puertas:</label>
+            <input type="number" id="cantidad-puertas" required>
+
+            <label for="cantidad-ruedas">Cantidad de Ruedas:</label>
+            <input type="number" id="cantidad-ruedas" required>
+
+            <button id="guardar-btn" type="submit">Guardar</button>
+            <button id="cancelar-btn" type="button">Cancelar</button>
+        </form>
+        <button id="volver">Volver al Listado</button>
+    </section>
 </body>
 </html>
