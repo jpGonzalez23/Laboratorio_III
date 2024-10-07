@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="body">
+    <input id="txtNombre" type="text">
+    <input type="button" value="bucar" onclick="bucarCarta()"> <br> <br>
+</body>
+
+<script>
+    function bucarCarta() {
+        let nombre = document.getElementById("txtNombre").value;
+        var xhttp = new XMLHttpRequest(); //Instancio el objeto
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status == 200) {
+                    let jsonRespuesta = JSON.parse(xhttp.response);
+                    let carta = document.createElement("img");
+
+                    carta.setAttribute("src", jsonRespuesta.image_uris.normal);
+                    document.getElementById("body").appendChild(carta); 
+
+                    //document.getElementById("body").innerHTML = xhttp.response;
+                } else if (xhttp.status == 404) {
+                    let carta = document.createElement("img");
+                    carta.setAttribute("src", "https://www.shutterstock.com/image-vector/image-not-found-grayscale-photo-260nw-1737334631.jpg")
+                    document.getElementById("body").appendChild(carta);
+                }
+            }
+        };
+
+        xhttp.open("GET", `https://api.scryfall.com/cards/named?fuzzy=${nombre}`); //Inicializo la solicitud
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(); //Envio la solicitud
+    }
+</script>
+
+</html>
