@@ -17,8 +17,6 @@ export default class Aereo extends Vehiculo {
     setAlturaMaxima(alturaMaxima) {
         if (alturaMaxima > 0) {
             this.altMax = alturaMaxima;
-        } else {
-            throw new Error("La altura máxima debe ser mayor a 0.");
         }
     }
 
@@ -29,12 +27,10 @@ export default class Aereo extends Vehiculo {
     setAutonomia(autonomia) {
         if (autonomia > 0) {
             this.autonomia = autonomia;
-        } else {
-            throw new Error("La autonomía debe ser mayor a 0.");
         }
     }
 
     toString() {
-        return `${super.toString()}, Altura Máxima: ${this.altMax}, Autonomía: ${this.autonomia}`;
+        return `${super.toString()}, Altura Máxima: ${this.getAlturaMaxima()}, Autonomía: ${this.getAutonomia()}`;
     }
 }

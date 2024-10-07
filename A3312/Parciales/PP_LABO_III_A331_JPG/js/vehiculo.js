@@ -1,24 +1,23 @@
-export class Vehiculo { 
-    static contadorID = 0
-    #id;
+export class Vehiculo {
+    id;
     modelo;
     anoFab;
     velMax;
 
-    constructor(modelo, anioFabricado, velocidadMaxima) { 
-        this.#id = ++Vehiculo.contadorID;
+    constructor(id, modelo, anioFabricado, velocidadMaxima) { 
+        this.id = id;
         this.modelo = modelo;
-        this.anioFabricado = anioFabricado;
+        this.anoFab = anioFabricado;
         this.velMax = velocidadMaxima;
     }   
 
     getId(){
-        return this.#id;
+        return this.id;
     }
 
     setId(id) {
         if(id > 0) {
-            this.#id = id;
+            this.id = id;
         }
     }
 
@@ -53,6 +52,6 @@ export class Vehiculo {
     }
 
     toString() {
-        return `ID: ${this.id}, modelo: ${this.modelo}, anioFabricado: ${this.anoFab}, velocidadMaxima: ${this.velMax}`;
+        return `ID: ${this.getId()}, modelo: ${this.getModelo()}, anioFabricado: ${this.getAnioFabricado()}, velocidadMaxima: ${this.getVelocidadMaxima()}`;
     }
 }
