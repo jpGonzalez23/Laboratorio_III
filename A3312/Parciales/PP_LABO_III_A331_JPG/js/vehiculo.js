@@ -54,4 +54,8 @@ export class Vehiculo {
     toString() {
         return `ID: ${this.getId()}, modelo: ${this.getModelo()}, anioFabricado: ${this.getAnioFabricado()}, velocidadMaxima: ${this.getVelocidadMaxima()}`;
     }
+
+    toJson() {
+        return JSON.stringify(this);
+    }
 }

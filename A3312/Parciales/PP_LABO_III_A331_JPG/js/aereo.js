@@ -33,4 +33,8 @@ export default class Aereo extends Vehiculo {
     toString() {
         return `${super.toString()}, Altura Máxima: ${this.getAlturaMaxima()}, Autonomía: ${this.getAutonomia()}`;
     }
+    
+    toJson() {
+        return JSON.stringify(this);
+    }
 }

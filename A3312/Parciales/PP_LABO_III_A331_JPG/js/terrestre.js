@@ -33,4 +33,8 @@ export default class Terrestre extends Vehiculo {
     toString() {
         return super.toString() + `, cantidad de puertas: ${this.cantPue}, cantidad de ruedas: ${this.cantRue}`;
     }
+
+    toJson() {
+        return JSON.stringify(this);
+    }
 }
