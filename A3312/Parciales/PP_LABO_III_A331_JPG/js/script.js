@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const promedio = filtradas.reduce((acc, v) => acc + v.velMax, 0) / filtradas.length;
         promedioVehiculo.textContent = `Promedio de velocidad: ${promedio.toFixed(2)}`;
+        promedioVehiculo.style.display = 'block';
     });
 
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
@@ -100,6 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
         formDatos.style.display = 'block';
     });
 
+    cancelarBtn.addEventListener('click', () => {
+        formAbm.style.display = 'none'; // Oculta el formulario de agregar/editar
+        formDatos.style.display = 'block'; // Muestra la vista de datos
+    
+        // Reinicia el formulario a su estado original
+        abmForm.reset();
+        editandoVehiculo = null; // Limpia el modo de edición
+        document.getElementById('tipo').disabled = false; // Permite cambiar el tipo nuevamente
+    });
+    
 
     abmForm.addEventListener('submit', e => {
         e.preventDefault();
