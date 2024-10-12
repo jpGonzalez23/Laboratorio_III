@@ -62,6 +62,18 @@ label, input, button {
 
 .guardar-btn,
 .cancelar-btn {
-    margin: 10px;
+    margin: 10px;   
+}
+
+.filtro {
+    margin: 20px 0;
+}
+
+.calcular-btn {
+    margin-top: 20px;
+}
+
+.promedio-vehiculo {
+    border: 2px solid black;
 }
 
