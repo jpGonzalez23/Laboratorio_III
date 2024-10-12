@@ -1,0 +1,127 @@
+@font-face {
+	font-family: poppins;
+	src: url(../assets/fonts/Poppins-Black.ttf);
+}
+
+header {
+  padding: 20px 20px;
+  background-color: grey;
+  background-image: url(../assets/images/header.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+
+  font-family: poppins, sans-serif;
+}
+
+@media(max-width:760px) {  
+  header {
+    background-image: none;
+    background: green;
+  }
+}
+
+.barra {
+  padding-top: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header nav ul {
+  text-decoration: none;
+  list-style-type: none;
+
+  flex-direction: row;
+  justify-content: right;
+}
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 20px;
+}
+header h1 {
+  color: white;
+  width: 700px;
+  font-size: 50px;
+}
+
+.card {
+  background: #dedede;
+
+  /* border-radius: 1rem; */
+  border: #bebebe solid 2px;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para resaltar la tarjeta */
+}
+
+.house-articles {
+  flex-wrap: wrap;
+  justify-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+}
+
+.house-article {
+  width: 400px;
+}
+
+.house-article .card-img img {
+  width: 100%;
+  height: auto;
+
+  opacity: 0.75;
+	transition: opacity 2s;
+
+  /* border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem; */
+}
+
+.house-article .card-img img:hover {
+  opacity: 1;
+}
+
+
+.card-body {
+  padding: 0.5rem;
+
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.card-body h3 {
+  font-size: 30px;
+}
+
+.card-body b {
+  font-size: 20px;
+  color: green;
+}
+
+.house-details {
+  width: 100%;
+
+  justify-content: center;
+
+  gap: 2rem;
+}
+
+.house-detail {
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.card-body button {
+  height: 2rem;
+
+  color: white;
+  background: #e08709;
+}

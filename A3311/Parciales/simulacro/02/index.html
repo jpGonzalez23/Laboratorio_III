@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 2</title>
+
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script src="./index.js"></script>
+  </head>
+
+  <body>
+    <section>
+      <h1>Clase 2: Formularios</h1>
+
+      <form action="" method="post" id="form-usuario">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          
+          <input
+            type="text"
+            required
+            name="nombre"
+            id="nombre"
+            placeholder="Ingrese nombre.."
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+
+          <input
+            type="text"
+            required
+            name="apellido"
+            id="apellido"
+            placeholder="Ingrese apellido.."
+          />
+        </div>
+
+        <!-- Puede elegir multiple opcion -->
+        <div class="form-group">
+            <div class="form-group">
+              <label for="rock">Rock</label>
+
+              <input type="checkbox" name="rock" id="rock" />
+            </div>
+          
+            <div class="form-group">
+              <label for="pop">Pop</label>
+
+              <input type="checkbox" name="pop" id="pop" />
+            </div>
+          
+            <div class="form-group">
+              <label for="reggae">Reggae</label>
+
+              <input type="checkbox" name="reggae" id="reggae" />
+            </div>
+        </div>
+
+        <!-- Solo puede elegir una opcion -->
+        <div class="form-group">
+          <div class="form-group">
+            <label for="rMasculino">Masculino</label>
+
+            <input type="radio" name="genero" id="rMasculino" />
+          </div>
+
+          <div class="form-group">
+            <label for="rFemenino">Femenino</label>
+
+            <input type="radio" name="genero" id="rFemenino" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <label for="pais">Pais</label>
+
+            <select name="pais" id="pais">
+              <optgroup label="Lat">
+                <option value="1">Argentina</option>
+                <option value="2">Brazion</option>
+                <option value="3">Francia</option>
+              </optgroup>
+
+              <optgroup label="Eur">
+                <option value="4">Argentina</option>
+                <option value="5">Brazion</option>
+                <option value="6">Francia</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="observacion">Observacion</label>
+          
+          <textarea
+            type="text"
+            name="observacion"
+            id="observacion"
+            rows="4"
+            placeholder="Ingrese Observacion..">
+          </textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="archivo">Archivo</label>
+            
+            <input
+              type="file"
+              name="archivo"
+              id="archivo"
+              placeholder="Ingrese Archivo..">
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn">Enviar!</button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>
