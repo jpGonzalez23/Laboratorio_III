@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <title>Simulacro Segundo Parcial</title>
+</head>
+
+<body>
+    <section id="form-datos">
+        <h1>Listado de Personas</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-id">ID</th>
+                    <th class="col-nombre">Nombre</th>
+                    <th class="col-apellido">Apellido</th>
+                    <th class="col-edad">Edad</th>
+                    <th class="col-sueldo-compras">Sueldo/Compras</th>
+                    <th class="col-ventas-telefono">Ventas/Telefono</th>
+                    <th class="col-acciones">Acciones</th>
+                </tr>
+            </thead>
+            
+            <tbody id="tbody-personas">
+                <!-- Las filas se agregarán dinámicamente aquí -->
+            </tbody>
+        </table>
+
+        <button id="btn-agregar">Agregar</button>
+    </section>
+
+    <section id="form-abm">
+        <h2>Formulario de Alta</h2>
+
+        <form id="abm-form" method="post">
+            <div class="input-group">
+                <label for="txtNombre">Nombre</label>
+                <input type="text" name="txtNombre" id="txtNombre" required>
+            </div>
+
+            <div class="input-group">
+                <label for="txtApellido">Apellido</label>
+                <input type="text" name="txtApellido" id="txtApellido" required>
+            </div>
+
+            <div class="input-group">
+                <label for="txtEdad">Edad</label>
+                <input type="number" name="txtEdad" id="txtEdad" required>
+            </div>
+
+            <div class="input-group">
+                <label for="txtSueldo">Sueldo</label>
+                <input type="number" name="txtSueldo" id="txtSueldo">
+            </div>
+
+            <div class="input-group">
+                <label for="txtCompras">Compras</label>
+                <input type="number" name="txtCompras" id="txtCompras">
+            </div>
+
+            <div class="input-group">
+                <label for="txtVentas">Ventas</label>
+                <input type="number" name="txtVentas" id="txtVentas">
+            </div>
+
+            <div class="input-group">
+                <label for="txtTelefono">Teléfono</label>
+                <input type="tel" name="txtTelefono" id="txtTelefono" pattern="[0-9]{10}" title="Debe tener 10 dígitos">
+            </div>
+
+            <div class="input-group">
+                <input type="submit" value="Guardar" id="btnGuardar">
+            </div>
+        </form>
+    </section>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>
