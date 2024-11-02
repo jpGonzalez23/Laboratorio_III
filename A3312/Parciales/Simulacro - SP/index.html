@@ -12,7 +12,6 @@
 <body>
     <section id="form-datos">
         <h1>Listado de Personas</h1>
-
         <table>
             <thead>
                 <tr>
@@ -20,9 +19,12 @@
                     <th class="col-nombre">Nombre</th>
                     <th class="col-apellido">Apellido</th>
                     <th class="col-edad">Edad</th>
-                    <th class="col-sueldo-compras">Sueldo/Compras</th>
-                    <th class="col-ventas-telefono">Ventas/Telefono</th>
-                    <th class="col-acciones">Acciones</th>
+                    <th class="col-ventas">Ventas</th>
+                    <th class="col-sueldo">Sueldo</th>
+                    <th class="col-compras">Compras</th>
+                    <th class="col-telefono">Telefono</th>
+                    <th class="col-modificar">Modificar</th>
+                    <th class="col-eliminar">Eliminar</th>
                 </tr>
             </thead>
             
@@ -31,13 +33,13 @@
             </tbody>
         </table>
 
-        <button id="btn-agregar">Agregar</button>
+        <button onclick="mostrarFormularioABM()">Agregar</button>
     </section>
 
-    <section id="form-abm">
-        <h2>Formulario de Alta</h2>
+    <section id="form-abm" style="display: none;">
+        <h2 id="accion-titulo">Formulario de Alta</h2>
 
-        <form id="abm-form" method="post">
+        <form id="abm-form">
             <div class="input-group">
                 <label for="txtNombre">Nombre</label>
                 <input type="text" name="txtNombre" id="txtNombre" required>
@@ -73,13 +75,14 @@
                 <input type="tel" name="txtTelefono" id="txtTelefono" pattern="[0-9]{10}" title="Debe tener 10 dígitos">
             </div>
 
-            <div class="input-group">
-                <input type="submit" value="Guardar" id="btnGuardar">
-            </div>
+            <button type="button" onclick="alta()">Aceptar</button>
+            <button type="button" onclick="cancelar()">Cancelar</button>
         </form>
     </section>
 
-    <script type="module" src="./js/app.js"></script>
+    <div id="spinner" style="display: none;">Cargando...</div>
+
+    <script type="module" src="./src/app.js"></script>
 </body>
 
 </html>

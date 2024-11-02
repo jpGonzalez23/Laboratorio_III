@@ -47,9 +47,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-#form-abm {
-    display: none;
-}
+
 
 .abm-form {
     display: flex;
@@ -60,9 +58,26 @@ label, input, button {
     padding: 10px;
 }
 
-.guardar-btn,
-.cancelar-btn {
-    margin: 10px;   
+#form-abm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    display: none;
+    border: 1px solid #ccc;
+}
+
+#spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 
