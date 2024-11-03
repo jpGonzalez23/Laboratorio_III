@@ -50,9 +50,14 @@ function mostrarLista() {
  * Muestra el formulario de alta/baja/modificación ocultando el listado de personas.
  */
 window.mostrarFormularioABM = function () {
+    // Limpiar los campos del formulario
     document.getElementById("form-datos").style.display = "none";
     document.getElementById("form-abm").style.display = "block";
+
+    // Reiniciar el valor de currentPersona para indicar que es una nueva entrada
+    currentPersona = null;
 }
+
 
 /**
  * Cierra el formulario de alta/baja/modificaci n y vuelve a mostrar la lista de personas.
@@ -167,7 +172,7 @@ window.modificar = async function (id) {
         document.getElementById("txtApellido").value = persona.apellido;
         document.getElementById("txtEdad").value = persona.edad;
 
-        if(persona.ventas !== undefined) {
+        if (persona.ventas !== undefined) {
             document.getElementById("txtVentas").value = persona.ventas;
             document.getElementById("txtVentas").style.display = 'block';
 
@@ -175,7 +180,7 @@ window.modificar = async function (id) {
             document.getElementById("txtTelefono").style.display = 'none';
         }
 
-        if(persona.sueldo !== undefined) {
+        if (persona.sueldo !== undefined) {
             document.getElementById("txtSueldo").value = persona.sueldo;
             document.getElementById("txtSueldo").style.display = 'block';
 
@@ -183,12 +188,12 @@ window.modificar = async function (id) {
             document.getElementById("txtTelefono").style.display = 'none';
         }
 
-        if(persona.compras !== undefined) {
+        if (persona.compras !== undefined) {
             document.getElementById("txtCompras").value = persona.compras;
             document.getElementById("txtCompras").style.display = 'block';
         }
 
-        if(persona.telefono !== undefined) {
+        if (persona.telefono !== undefined) {
             document.getElementById("txtTelefono").value = persona.telefono;
             document.getElementById("txtTelefono").style.display = 'block';
         }
@@ -202,8 +207,65 @@ window.modificar = async function (id) {
  * @param {number} id Identificador unico de la persona a eliminar
  */
 window.eliminar = async function (id) {
+    const persona = personas.find(p => p.id === id);
 
+    if (persona) {
+        currentPersona = persona.id;
 
+        document.getElementById('txtNombre').value = persona.nombre;
+        document.getElementById('txtApellido').value = persona.apellido;
+        document.getElementById('txtEdad').value = persona.edad;
+        document.getElementById('txtVentas').value = persona.ventas || '';
+        document.getElementById('txtCompras').value = persona.compras || '';
+        document.getElementById('txtSueldo').value = persona.sueldo || '';
+        document.getElementById('txtTelefono').value = persona.telefono || '';
+
+        document.getElementById('txtNombre').disabled = true;
+        document.getElementById('txtApellido').disabled = true;
+        document.getElementById('txtEdad').disabled = true;
+        document.getElementById('txtVentas').disabled = true;
+        document.getElementById('txtCompras').disabled = true;
+        document.getElementById('txtSueldo').disabled = true;
+        document.getElementById('txtTelefono').disabled = true;
+
+        mostrarFormularioABM();
+    }
+}
+
+window.confirmarEliminar = function () {
+    document.getElementById('accion-titulo').innerHTML = 'Confirmar eliminación';
+
+    if (currentPersona !== null) {
+        document.getElementById('spinner').style.display = 'block';
+        document.getElementById('form-abm').style.display = 'none';
+
+        const url = 'http://localhost/sp-PersonasEmpleadosClientes/PersonasEmpleadosClientes.php?id=';
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: currentPersona })
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    personas = personas.filter(p => p.id !== currentPersona);
+                    currentPersona = null;
+
+                    document.getElementById('spinner').style.display = 'none';
+                    document.getElementById('form-datos').style.display = 'block';
+
+                    mostrarLista();
+                } else {
+                    throw new Error('Error al cargar los datos');
+                }
+            })
+            .catch(error => {
+                document.getElementById('spinner').style.display = 'none';
+                document.getElementById('form-abm').style.display = 'block';
+                alert(error.message);
+            });
+    }
 }
 
 /**
